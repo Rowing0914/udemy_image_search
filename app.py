@@ -5,15 +5,15 @@ from flask import Flask, render_template
 app = Flask(__name__, static_url_path='/static')
 ims = img_saver()
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
 	return render_template('index.html')
 
-@app.route('/hello')
+@app.route('/hello', methods=['GET'])
 def helloWorld():
 	return hello()
 
-@app.route('/trainAgain')
+@app.route('/trainAgain', methods=['GET'])
 def trainAgain():
 	ims.main()
 	return render_template('index.html')
