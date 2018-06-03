@@ -1,0 +1,83 @@
+<html>
+<head>
+    <!-- disable the cache -->
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        // showImg: display the corresponding image to the user's input
+        // Logic
+            // if the input length is less than 1, then display the error modal
+            // if the input is okay, then move on to next condition
+            // if the input is between 0 and 9, then show the image!
+            // otherwise, notice them the rule!
+        function showImg() {
+            if($('#mytext').val().length === 0) {
+                $( "#dialog" ).dialog();
+            }  
+            else {
+                if($("#mytext").val() < 10 && $("#mytext").val() >= 0) {
+                // to disable the cache in browser, I set the dummy parameter
+        		var path = "/static/images/" + $("#mytext").val() + ".png?dummy=8484744";
+        		$("#map_img").attr("src",path);
+                document.getElementById("map_img").style.display = "";
+                } else {
+                    $( "#dialog" ).dialog();
+                    document.getElementById("map_img").style.display = "none";
+                }
+            }
+        }
+
+    // trainAgain: produce the images again
+    // calling the api using http GET request
+    // the trainAgain() method is defined in the app.py
+    function trainAgain() {
+     $.ajax({
+        type: 'get',
+        url: '/trainAgain',
+        success: function(response) {
+        	$("#trainAgain").val("Hold on!");
+             console.log(response);
+        },
+        error: function(err) {
+             console.log(err);
+        }
+
+    });
+}
+    </script>
+
+    <!-- initialli we want to disable the dialog -->
+    <style type="text/css">
+        #dialog {
+            display:none;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Sentence -->
+    <h1>Integer Image Search</h1>
+    <h3>Please tell me your favourite integer from 0 to 9!</h3>
+
+    <!-- Form and sending the http get request -->
+    <div>
+    <input id="mytext" type="text" name="mytext" required />
+    <input type="submit" value="Submit" onclick="showImg()" />
+	<form id="trainAgain" action="/" method="GET">
+		<button type="submit" value="trainAgain" onclick="trainAgain()">This is wrong!!</button>
+	</form>
+    </div>
+
+   <!-- Modal part -->
+    <div id="dialog" title="Warning!!">
+        <p>Please pick one from 0 to 9!</p>
+    </div>
+
+    <!-- Image -->
+    <div>
+    <img id="map_img" src="/static/images/1.png?dummy=8484744" style="display: none;" width="400" height="400"/>
+    </div>
+</body>
+</html>
