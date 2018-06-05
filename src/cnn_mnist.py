@@ -6,7 +6,6 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.models import model_from_json
 from keras import backend as K
 import numpy as np
-import matplotlib.pyplot as plt
 
 batch_size = 128
 num_classes = 10
