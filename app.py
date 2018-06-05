@@ -8,10 +8,12 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 import numpy as np
 
-# heroku doesn't take _tinker, so this is a adhoc solution...
+# heroku doesn't take _tinker, so this is a adhoc solution
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
+
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
