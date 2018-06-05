@@ -2,6 +2,6 @@ Flask
 keras
 h5py
 tensorflow
-matplotlib
+scipy
 numpy
 gunicorn
