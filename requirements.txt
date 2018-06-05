@@ -5,3 +5,5 @@ tensorflow
 scipy
 numpy
 gunicorn
+pillow
+matplotlib
