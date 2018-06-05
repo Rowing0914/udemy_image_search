@@ -1,9 +1,7 @@
 <html>
 <head>
-    <!-- disable the cache -->
-    <meta http-equiv="Pragma" content="no-cache">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         // showImg: display the corresponding image to the user's input
@@ -13,14 +11,16 @@
             // if the input is between 0 and 9, then show the image!
             // otherwise, notice them the rule!
         function showImg() {
+            // disable cache!!
+            nocache = Math.random();
             if($('#mytext').val().length === 0) {
                 $( "#dialog" ).dialog();
             }  
             else {
                 if($("#mytext").val() < 10 && $("#mytext").val() >= 0) {
                 // to disable the cache in browser, I set the dummy parameter
-        		var path = "/static/images/" + $("#mytext").val() + ".png?dummy=8484744";
-        		$("#map_img").attr("src",path);
+                var path = "/static/images/" + $("#mytext").val() + ".png?" + nocache;
+                $("#map_img").attr("src",path);
                 document.getElementById("map_img").style.display = "";
                 } else {
                     $( "#dialog" ).dialog();
@@ -37,13 +37,12 @@
         type: 'get',
         url: '/trainAgain',
         success: function(response) {
-        	$("#trainAgain").val("Hold on!");
+            $("#trainAgain").val("Hold on!");
              console.log(response);
         },
         error: function(err) {
              console.log(err);
         }
-
     });
 }
     </script>
@@ -65,9 +64,9 @@
     <div>
     <input id="mytext" type="text" name="mytext" required />
     <input type="submit" value="Submit" onclick="showImg()" />
-	<form id="trainAgain" action="/" method="GET">
-		<button type="submit" value="trainAgain" onclick="trainAgain()">This is wrong!!</button>
-	</form>
+    <form id="trainAgain" action="/" method="GET">
+        <button type="submit" value="trainAgain" onclick="trainAgain()">This is wrong!!</button>
+    </form>
     </div>
 
    <!-- Modal part -->
@@ -77,7 +76,7 @@
 
     <!-- Image -->
     <div>
-    <img id="map_img" src="/static/images/1.png?dummy=8484744" style="display: none;" width="400" height="400"/>
+    <img id="map_img" src="/static/images/1.png" style="display: none;" width="400" height="400"/>
     </div>
 </body>
 </html>
