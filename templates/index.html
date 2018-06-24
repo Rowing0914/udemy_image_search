@@ -29,15 +29,15 @@
             }
         }
 
-    // trainAgain: produce the images again
+    // generateAgain: produce the images again
     // calling the api using http GET request
-    // the trainAgain() method is defined in the app.py
-    function trainAgain() {
+    // the generateAgain() method is defined in the app.py
+    function generateAgain() {
      $.ajax({
         type: 'get',
-        url: '/trainAgain',
+        url: '/generateAgain',
         success: function(response) {
-            $("#trainAgain").val("Hold on!");
+            $("#generateAgain").val("Hold on!");
              console.log(response);
         },
         error: function(err) {
@@ -64,8 +64,8 @@
     <div>
     <input id="mytext" type="text" name="mytext" required />
     <input type="submit" value="Submit" onclick="showImg()" />
-    <form id="trainAgain" action="/" method="GET">
-        <button type="submit" value="trainAgain" onclick="trainAgain()">This is wrong!!</button>
+    <form id="generateAgain" action="/" method="GET">
+        <button type="submit" value="generateAgain" onclick="generateAgain()">This is wrong!!</button>
     </form>
     </div>
 
